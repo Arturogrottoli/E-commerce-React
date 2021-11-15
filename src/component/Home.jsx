@@ -1,7 +1,9 @@
 import React from 'react'
+import Products from './Products'
 
 export default function Home() {
   return (
+
     <div className="hero">
       <div class="card bg-dark text-white border-0">
         <img src="/assets/bg.jpg" class="card-img" alt="Background"
@@ -17,6 +19,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Products />
     </div>
   )
 }
