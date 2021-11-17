@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import Login from './buttons/Login';
 import Signup from './buttons/Signup';
-import CartBtutton from './buttons/CartButton';
+import CartButton from './buttons/CartButton';
 
 export default function Navbar() {
 
@@ -33,7 +33,7 @@ export default function Navbar() {
 
             <Login />
             <Signup />
-            <CartBtutton />
+            <CartButton />
 
           </div>
         </div>

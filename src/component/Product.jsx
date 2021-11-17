@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { addCart } from '../redux/action';
 import { useParams } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import Skeleton from "react-loading-skeleton"
+import { addItem, delItem } from '../redux/action/index'
+import CartButton from './buttons/CartButton';
 
 const Product = () => {
 
   const { id } = useParams();
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState([0]);
   const [loading, setLoading] = useState(false);
-  let componentMounted = true;
 
-  const dispatch = useDispatch;
-  const addProduct = (product) => {
-    dispatch(addCart(product));
-  }
+  let componentMounted = true;
 
 
   useEffect(() => {
@@ -51,7 +48,24 @@ const Product = () => {
 
 
 
+
+
   const ShowProduct = () => {
+
+    const [CartButton, setCartBtn] = useState("Agregar al carrito")
+    const dispatch = useDispatch();
+
+    const handleCart = (product) => {
+      if (CartButton === "Agregar al carrito") {
+        dispatch(addItem(product))
+        setCartBtn("Quitar del carrito")
+      }
+      else {
+        dispatch(delItem(product))
+        setCartBtn("Agregar al carrito")
+      }
+    }
+
     return (
       <>
         <div className="col md-6">
@@ -66,7 +80,7 @@ const Product = () => {
           </p>
           <h3 className="display-6 fw-bold my-4">${product.price}</h3>
           <p className="lead">{product.description}</p>
-          <button className="btn btn-outline-dark px-4 py-2" onClick={() => addProduct(product)}>Agregar al carrito</button>
+          <button className="btn btn-outline-dark px-4 py-2" onClick={() => handleCart(product)}>{CartButton}</button>
           <NavLink to="/cart" className="btn btn-outline-dark ms-2 px-3 py-2">Ir al carrito</NavLink>
         </div>
       </>
